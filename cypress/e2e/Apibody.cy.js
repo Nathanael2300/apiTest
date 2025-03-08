@@ -42,7 +42,9 @@ describe('API Tests', () => {
             failOnStatusCode: false,
         })
         .should((res) => {
-            expect(res.status).to.equal(404);
+            expect(res.status).to.equal(404); //a API não foi configurada para retornar um 404 imediatamente após a exclusão (ou se 
+                                              // a exclusão falhou de alguma forma), pode ser que o recurso ainda esteja disponível por um 
+                                              // curto período de tempo ou que a API não esteja configurada corretamente para retornar esse código de status.
         });
     });
 });

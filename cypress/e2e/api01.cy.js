@@ -1,5 +1,5 @@
 describe('API Reqres', () => {
-  it.only('Criar Usuário e Validar a Resposta', () => {
+  it('Criar Usuário e Validar a Resposta', () => {
     cy.request('POST', 'https://reqres.in/api/users', {
       name: 'morpheus',
       job: 'leader'
@@ -10,14 +10,14 @@ describe('API Reqres', () => {
     });
   });
 
-  it.only('Deve retornar um usuario com sucesso (GET call)', () => {
+  it('Deve retornar um usuario com sucesso (GET call)', () => {
     cy.request('GET', 'https://reqres.in/api/users/2').should((res) => {
       expect(res.status).to.equal(200)
       expect(res.body.data).to.have.property('id', 2)
     });
   });
 
-  it.only('Deve criar um usuario com sucesso (POST call)', () => {
+  it('Deve criar um usuario com sucesso (POST call)', () => {
     cy.request('POST', 'https://reqres.in/api/users', {
       name: "Nathan",
       job: "QA Engineer"
@@ -28,7 +28,7 @@ describe('API Reqres', () => {
     })
   });
 
-  it.only('Deve atualizar um dado do usuario com sucesso (PUT call)', () => {
+  it('Deve atualizar um dado do usuario com sucesso (PUT call)', () => {
     cy.request('PUT', 'https://reqres.in/api/users/2', {
       name: 'Nathan',
       job: 'QA Engineer'
@@ -39,7 +39,7 @@ describe('API Reqres', () => {
     });
   });
 
-  it.only('Deve deletar um usuario com suceso (DELETE call)', () => {
+  it('Deve deletar um usuario com suceso (DELETE call)', () => {
     cy.request('DELETE', 'https://reqres.in/api/users/2', {
       name: 'Matheus',
       job: 'Dev Python'
@@ -56,7 +56,7 @@ describe('API Reqres', () => {
     })
   });
 
-  it.only('Deve registar o usuario com sucesso (POST call)', () => {
+  it('Deve registar o usuario com sucesso (POST call)', () => {
     cy.request('POST', 'https://reqres.in/api/register', {
       email: 'eve.holt@reqres.in',
       password: 'pistol'
@@ -67,7 +67,7 @@ describe('API Reqres', () => {
     });
   });
 
-  it.only('Deve dar um erro ao tentar registrar um usuario (POST call)', () => {
+  it('Deve dar um erro ao tentar registrar um usuario (POST call)', () => {
     cy.request({
       method: 'POST',
       url: 'https://reqres.in/api/register',
@@ -87,7 +87,7 @@ describe('API Reqres', () => {
     });
   });
 
-  it.only('Deve realizar o login com sucesso', () => {
+  it('Deve realizar o login com sucesso', () => {
     cy.request('POST', 'https://reqres.in/api/login', {
       email: 'eve.holt@reqres.in',
       password: 'cityslicka'
