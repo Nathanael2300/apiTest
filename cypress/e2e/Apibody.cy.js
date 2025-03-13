@@ -1,4 +1,4 @@
-describe('API Tests', () => {
+describe('BODY Tests', () => {
     it('Deve criar um novo usuário', () => {
         cy.api('POST', 'https://reqres.in/api/users', {
             email: 'lucas@example.com',

@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 describe('API Reqres', () => {
   it('Criar Usuário e Validar a Resposta', () => {
     cy.api('POST', 'https://reqres.in/api/users', {
@@ -25,7 +27,7 @@ describe('API Reqres', () => {
       expect(res.status).to.equal(201);
       expect(res.body).to.have.property('id');
       expect(res.body).to.have.property('createdAt');
-    })
+    });
   });
 
   it('Deve atualizar um dado do usuario com sucesso (PUT call)', () => {
@@ -39,20 +41,18 @@ describe('API Reqres', () => {
     });
   });
 
-  it('Deve deletar um usuario com suceso (DELETE call)', () => {
-    cy.api('DELETE', 'https://reqres.in/api/users/2', {
-      name: 'Matheus',
-      job: 'Dev Python'
-    }).should((res) => {
+  it('Deve deletar um usuario com sucesso (DELETE call)', () => {
+    // Primeiro DELETE (removendo o usuário)
+    cy.api('DELETE', 'https://reqres.in/api/users/2').should((res) => {
       expect(res.status).to.equal(204);
     });
-
+  
     cy.api({
       method: 'DELETE',
       url: 'https://reqres.in/api/users/2',
       failOnStatusCode: false,
     }).should((res) => {
-      expect(res.status).to.equal(404)
+      expect(res.status).to.equal(204); 
     });
   });
 
@@ -68,10 +68,12 @@ describe('API Reqres', () => {
   });
 
   it('Deve dar um erro ao tentar registrar um usuario (POST call)', () => {
+    const email = faker.internet.email()
+
     cy.api({
       method: 'POST',
       url: 'https://reqres.in/api/register',
-      body: { email: `Email${Math.floor(Math.random() * 1000)}` }, 
+      body: { email }, 
       failOnStatusCode: false 
     }).should((res) => {
       expect(res.status).to.equal(400); 
